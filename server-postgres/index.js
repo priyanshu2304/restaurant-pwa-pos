@@ -10,41 +10,43 @@ const app = express();
 app.set("trust proxy", 1); // friendly with Render/Proxies
 
 // ---- CORS: allow local dev + your production origin ----
-// const ALLOWED_ORIGINS = [
-//   "http://localhost:5173",
-//   "http://127.0.0.1:5173",
-//   process.env.FRONTEND_ORIGIN || "", // e.g. https://pos.therichie.in
-// ].filter(Boolean);
-
-// app.use(
-//   cors({
-//     origin(origin, cb) {
-//       // allow same-origin / curl / postman (no origin header)
-//       if (!origin) return cb(null, true);
-//       if (ALLOWED_ORIGINS.includes(origin)) return cb(null, true);
-//       return cb(null, false);
-//     },
-//   })
-// );
-
-const allow = (process.env.CORS_ORIGINS || "")
-  .split(",")
-  .map((s) => s.trim())
-  .filter(Boolean);
+const ALLOWED_ORIGINS = [
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  "https://pos.therichie.in",
+  "https://restaurant-pwa-pos.pages.dev",
+  process.env.FRONTEND_ORIGIN || "", // e.g. https://pos.therichie.in
+].filter(Boolean);
 
 app.use(
   cors({
-    origin: (origin, cb) => {
-      // allow server-to-server/curl (no Origin) and any origin in allow-list
+    origin(origin, cb) {
+      // allow same-origin / curl / postman (no origin header)
       if (!origin) return cb(null, true);
-      if (allow.length === 0 || allow.includes(origin)) return cb(null, true);
-      return cb(new Error("Not allowed by CORS"));
+      if (ALLOWED_ORIGINS.includes(origin)) return cb(null, true);
+      return cb(null, false);
     },
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-app.options("*", cors());
+
+// const allow = (process.env.CORS_ORIGINS || "")
+//   .split(",")
+//   .map((s) => s.trim())
+//   .filter(Boolean);
+
+// app.use(
+//   cors({
+//     origin: (origin, cb) => {
+//       // allow server-to-server/curl (no Origin) and any origin in allow-list
+//       if (!origin) return cb(null, true);
+//       if (allow.length === 0 || allow.includes(origin)) return cb(null, true);
+//       return cb(new Error("Not allowed by CORS"));
+//     },
+//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//   })
+// );
+// app.options("*", cors());
 
 // ---- Body parsers ----
 app.use(express.json({ limit: "2mb" }));
