@@ -1,0 +1,24 @@
+@page { size: 80mm auto; margin: 0; }
+body.print {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+.receipt { width: 72mm; padding: 6mm 4mm; }
+.receipt.w58 { width: 50mm; }
+hr { border: none; border-top: 1px dashed #000; margin: 6px 0; }
+.center { text-align: center; }
+.right { text-align: right; }
+.small { font-size: 12px; }
+.medium { font-size: 14px; }
+.large { font-size: 16px; font-weight: 700; }
+.row { display: flex; justify-content: space-between; }
+.row > span { white-space: pre; }
+.lineitem { display: flex; justify-content: space-between; }
+.lineitem .name { flex: 1; margin-right: 8px; }
+.lineitem .qty { width: 32px; text-align: right; }
+.lineitem .amt { width: 64px; text-align: right; }
+.noprint { display: none !important; }
+@media screen { .noprint { display: inline-block !important; } }
