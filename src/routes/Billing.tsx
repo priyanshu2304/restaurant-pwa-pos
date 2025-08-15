@@ -125,14 +125,14 @@ export default function Billing() {
           placeholder="Item ID"
           value={itemId}
           onChange={(e) => setItemId(e.target.value)}
-          style={{ flex: 2, padding: 12, fontSize: 16 }}
+          style={{ flex: 2, padding: 12, fontSize: 16, width: "100%" }}
         />
         <input
           placeholder="Qty"
           inputMode="numeric"
           value={qty}
           onChange={(e) => setQty(e.target.value)}
-          style={{ width: 80, padding: 12, fontSize: 16 }}
+          style={{ width: 60, padding: 12, fontSize: 16 }}
         />
         <button onClick={add} style={{ padding: "12px 16px", fontSize: 16 }}>
           Add
