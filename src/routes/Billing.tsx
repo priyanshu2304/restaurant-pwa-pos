@@ -123,6 +123,7 @@ export default function Billing() {
       <div style={{ display: "flex", gap: 8 }}>
         <input
           placeholder="Item ID"
+          inputMode="numeric"
           value={itemId}
           onChange={(e) => setItemId(e.target.value)}
           style={{ flex: 2, padding: 12, fontSize: 16, width: "100%" }}
